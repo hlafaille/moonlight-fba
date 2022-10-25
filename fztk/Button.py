@@ -75,7 +75,9 @@ class FzTkButton(FzTkWidget):
             # get mouse positions
             mouse_x = self.get_mouse_position().x
             mouse_y = self.get_mouse_position().y
-            window_width, window_height = pygame.display.get_window_size()
+
+            # todo change later
+            window_width, window_height = 1920, 1080
 
             # if the tooltip will exit the screen bounds, blit it minus the tooltip width
             if tooltip_width + mouse_x > window_width:
