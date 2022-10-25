@@ -26,4 +26,4 @@ class Card:
         card_x = end[0] / 2 - self.width / 2
         card_y = end[1] / 2 - self.height / 2 + begin[1] / 2
 
-        pygame.draw.rect(self.panel.manager.display, Color("#363636"), pygame.Rect(card_x, card_y, self.width, self.height), 0, 8)
+        pygame.draw.rect(self.panel.manager.display, Color("#363636"), pygame.Rect(card_x, card_y, self.width, self.height))
