@@ -11,7 +11,7 @@ HEIGHT = 1080
 pygame.init()
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Faction: Zero")
-
+pygame.mouse.set_visible(False)
 
 # create FzEngine objects
 font_handler = FzTkFontHandler()
@@ -21,7 +21,7 @@ clock = pygame.time.Clock()
 # create button
 button = FzTkButton(
     font_handler=font_handler,
-    x=int(WIDTH - 180),
+    x=0,
     y=0,
     height=60,
     width=180,
@@ -30,8 +30,7 @@ button = FzTkButton(
     tooltip="Changes between development engine scenes."
 )
 
-#button.register_click_callback(lambda: scene_handler.dev_toggle_scene())
-
+# main loop
 while True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
