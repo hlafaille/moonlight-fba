@@ -12,7 +12,7 @@ if sys.platform == "linux":
     FB_VIRTUAL_SIZE = subprocess.run(["cat", "/sys/class/graphics/fb0/virtual_size"], stdout=subprocess.PIPE)
     WIDTH, HEIGHT = FB_VIRTUAL_SIZE.stdout.decode("utf8").split(",")
     WIDTH = int(WIDTH)
-    HEIGHt = int(HEIGHT)
+    HEIGHT = int(HEIGHT)
 else:
     WIDTH = 1920
     HEIGHT = 1080
