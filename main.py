@@ -4,8 +4,8 @@ from fztk.Button import FzTkButton
 from fztk.FontHandler import FzTkFontHandler
 
 # width and height
-WIDTH = 1280
-HEIGHT = 720
+WIDTH = 1920
+HEIGHT = 1080
 
 # initialize pygame and create screen
 pygame.init()
