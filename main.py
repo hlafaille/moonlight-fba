@@ -9,7 +9,7 @@ HEIGHT = 1080
 
 # initialize pygame and create screen
 pygame.init()
-screen = pygame.display.set_mode((WIDTH, HEIGHT), pygame.RESIZABLE)
+screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Faction: Zero")
 
 
@@ -40,7 +40,7 @@ while True:
 
     delta_time = clock.tick(60) / 1000
 
-    button.set_text("ass")
+    button.set_text(round(clock.get_fps()))
     button.update()
 
     pygame.display.update()
