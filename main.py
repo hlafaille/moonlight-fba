@@ -1,11 +1,18 @@
+import os
+import sys
+
 import pygame
 
 from tk.Panel import Panel
 from tk.PanelManager import PanelManager
 
 # width and height
-WIDTH = 1920
-HEIGHT = 1080
+if sys.platform == "linux":
+    WIDTH = os.system("cat /sys/class/graphics/fb0/virtual_size | cut -d, -f1")
+    HEIGHT = os.system("cat /sys/class/graphics/fb0/virtual_size | cut -d, -f2")
+else:
+    WIDTH = 1920
+    HEIGHT = 1080
 
 # initialize pygame and create screen
 pygame.init()
