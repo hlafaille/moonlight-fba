@@ -25,7 +25,7 @@ class Panel:
         self._desired_bar_height = 140
         self._current_text_y = 0
         self._desired_text_y = 25
-        self._bar_exponent = 3
+        self._bar_exponent = 2.7
 
     def add(self, widget):
         """
