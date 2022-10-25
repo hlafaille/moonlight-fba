@@ -25,7 +25,6 @@ while True:
     # check for events
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
-            panel_manager.logger.info("Quitting...")
             pygame.quit()
             exit()
 

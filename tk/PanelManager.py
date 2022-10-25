@@ -2,7 +2,6 @@ import logging
 
 import pygame.font
 from pygame import Surface
-from rich.logging import RichHandler
 
 
 class PanelManager:
@@ -11,15 +10,6 @@ class PanelManager:
         self._panels = []
         self.display = display
         self._current_panel = None
-
-        # setup rich logger
-        logging.basicConfig(
-            level="NOTSET",
-            format="%(message)s",
-            datefmt="[%X]",
-            handlers=[RichHandler(rich_tracebacks=True)]
-        )
-        self.logger = logging.getLogger("rich")
 
         # setup font objects
         self.font_title = pygame.font.Font("tk/fonts/roboto_regular.ttf", 48)
