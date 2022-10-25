@@ -49,6 +49,8 @@ class Panel:
         for widget in self.widgets:
             widget.update(delta)
 
-        text = self.manager.font_title.render(self.title, True, Color("#f5f5f5"))
+        title = self.manager.font_title.render(self.title, True, Color("#f5f5f5"))
+        subtitle = self.manager.font_normal.render("Hello, world!", True, Color("#bdbdbd"))
         self.manager.display.fill(Color("#212121"))
-        self.manager.display.blit(text, (20, 20))
+        self.manager.display.blit(title, (20, 20))
+        self.manager.display.blit(subtitle, (330, 56))
