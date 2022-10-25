@@ -20,7 +20,7 @@ else:
 # initialize pygame and create screen
 pygame.init()
 pygame.joystick.init()
-display = pygame.display.set_mode((WIDTH, HEIGHT))
+display = pygame.display.set_mode((WIDTH, HEIGHT), pygame.FULLSCREEN)
 pygame.mouse.set_visible(False)
 
 # create clock
