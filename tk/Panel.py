@@ -22,7 +22,9 @@ class Panel:
 
         # bar animation
         self._current_bar_height = 0
-        self._desired_bart_height = 140
+        self._desired_bar_height = 140
+        self._current_text_y = 0
+        self._desired_text_y = 25
         self._bar_exponent = 3
 
     def add(self, widget):
@@ -47,18 +49,19 @@ class Panel:
         :return:
         """
 
-        if self._current_bar_height <= self._desired_bart_height:
+        if self._current_bar_height <= self._desired_bar_height:
 
-            if self._current_bar_height > self._desired_bart_height / 5:
+            if self._current_bar_height > self._desired_bar_height / 5:
                 self._bar_exponent = self._bar_exponent / 1.05
             self._current_bar_height += 0.3 * (delta * 1000) * self._bar_exponent
+            self._current_text_y += 0.055 * (delta * 1000) * self._bar_exponent
 
             title_bar = pygame.draw.rect(
                 self.manager.display, Color("#1c1c1c"), pygame.Rect(0, 0, self.manager.width, self._current_bar_height)
             )
-            print(self._current_bar_height)
+
             title = self.manager.font_title.render(self.title, True, Color("#f5f5f5"))
-            self.manager.display.blit(title, (20, 25))
+            self.manager.display.blit(title, (20, self._current_text_y))
         else:
             self._title_animation_complete = True
 
