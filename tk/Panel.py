@@ -1,8 +1,6 @@
 from typing import Optional
-
 import pygame
 from pygame import Color
-
 from tk.PanelManager import PanelManager
 
 
@@ -20,7 +18,7 @@ class Panel:
         self.subtitle = subtitle
         self.focused = focused
         self.id = id(self)
-        self.widgets = []
+        self.cards = []
 
     def set_manager(self, manager: PanelManager):
         """
@@ -31,13 +29,13 @@ class Panel:
         self.manager = manager
         self.title_bar = PanelTitle(manager=self.manager, title=self.title, subtitle=self.subtitle)
 
-    def add(self, widget):
+    def add_card(self, card):
         """
         Adds a widget to this panel
         :param widget:
         :return:
         """
-        self.widgets.append(widget)
+        self.cards.append(card)
 
     def set_focus(self, focus: bool):
         """
@@ -46,13 +44,6 @@ class Panel:
         :return:
         """
         self.focused = focus
-
-    def _slide_in(self, delta: float):
-        """
-        Function that draws the slide_in animation
-        :return:
-        """
-
 
     def _close(self):
         """
@@ -67,9 +58,17 @@ class Panel:
         :return:
         """
         self.manager.display.fill(Color("#272727"))
-        for widget in self.widgets:
-            widget.update(delta)
         self.title_bar.update()
+
+        for card in self.cards:
+            card.update(float)
+
+    def get_drawable_area(self) -> tuple:
+        """
+        Returns a set of coordinates that are acceptable to be drawn in
+        :return:
+        """
+        return (0, 140), (self.manager.width, self.manager.height)
 
 
 class PanelTitle:

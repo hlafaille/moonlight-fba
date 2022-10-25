@@ -6,6 +6,7 @@ import pygame
 
 from tk.Panel import Panel
 from tk.PanelManager import PanelManager
+from ui.Welcome import Welcome
 
 # width and height
 if sys.platform == "linux":
@@ -29,7 +30,7 @@ clock = pygame.time.Clock()
 
 # create panel manager & main panel
 panel_manager = PanelManager(display, WIDTH, HEIGHT)
-panel = Panel("Welcome", subtitle="This is a test subtitle")
+panel = Welcome()
 panel_manager.add(panel)
 
 # main loop
