@@ -1,4 +1,5 @@
 import os
+import subprocess
 import sys
 
 import pygame
@@ -8,8 +9,8 @@ from tk.PanelManager import PanelManager
 
 # width and height
 if sys.platform == "linux":
-    WIDTH = int(os.system("cat /sys/class/graphics/fb0/virtual_size | cut -d, -f1"))
-    HEIGHT = int(os.system("cat /sys/class/graphics/fb0/virtual_size | cut -d, -f2"))
+    FB_VIRTUAL_SIZE = subprocess.run(["cat", "/sys/class/graphics/fb0/virtual_size"])
+    WIDTH, HEIGHT = FB_VIRTUAL_SIZE.stdout.decode("utf8").split(",")
 else:
     WIDTH = 1920
     HEIGHT = 1080
