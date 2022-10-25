@@ -1,5 +1,6 @@
 from typing import Optional
 
+import pygame
 from pygame import Color
 
 from tk.PanelManager import PanelManager
@@ -40,17 +41,22 @@ class Panel:
         :return:
         """
 
+    def _draw_title(self):
+        """
+        Draws the title at the top of the screen, returns the rect dimmensions
+        :return:
+        """
+        title_bar = pygame.draw.rect(self.manager.display, Color("#1c1c1c"), pygame.Rect(0, 0, self.manager.width, 140))
+        title = self.manager.font_title.render(self.title, True, Color("#f5f5f5"))
+        self.manager.display.blit(title, (20, 25))
+
     def update(self, delta: float):
         """
         Called from the panel manager, draws this panel
         :param delta:
         :return:
         """
+        self.manager.display.fill(Color("#272727"))
         for widget in self.widgets:
             widget.update(delta)
-
-        title = self.manager.font_title.render(self.title, True, Color("#f5f5f5"))
-        subtitle = self.manager.font_normal.render("Hello, world!", True, Color("#bdbdbd"))
-        self.manager.display.fill(Color("#212121"))
-        self.manager.display.blit(title, (20, 20))
-        self.manager.display.blit(subtitle, (330, 56))
+        self._draw_title()

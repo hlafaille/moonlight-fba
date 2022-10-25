@@ -6,9 +6,11 @@ from pygame import Surface
 
 class PanelManager:
     """Controls which panel should be on screen, and which came before it"""
-    def __init__(self, display: Surface):
+    def __init__(self, display: Surface, width, height):
         self._panels = []
         self.display = display
+        self.width = width
+        self.height = height
         self._current_panel = None
 
         # setup font objects

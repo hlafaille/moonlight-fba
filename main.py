@@ -9,6 +9,7 @@ HEIGHT = 1080
 
 # initialize pygame and create screen
 pygame.init()
+pygame.joystick.init()
 display = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.mouse.set_visible(False)
 
@@ -16,7 +17,7 @@ pygame.mouse.set_visible(False)
 clock = pygame.time.Clock()
 
 # create panel manager & main panel
-panel_manager = PanelManager(display)
+panel_manager = PanelManager(display, WIDTH, HEIGHT)
 panel = Panel("Welcome")
 panel_manager.add(panel)
 
