@@ -1,5 +1,7 @@
 from typing import Optional
 
+from pygame import Color
+
 from tk.PanelManager import PanelManager
 
 
@@ -47,5 +49,6 @@ class Panel:
         for widget in self.widgets:
             widget.update(delta)
 
-        text = self.manager.font_title.render(self.title, True, (255, 255, 255))
-        self.manager.display.blit(text, (0, 0))
+        text = self.manager.font_title.render(self.title, True, Color("#f5f5f5"))
+        self.manager.display.fill(Color("#212121"))
+        self.manager.display.blit(text, (20, 20))
