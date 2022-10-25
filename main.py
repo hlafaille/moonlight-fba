@@ -8,8 +8,8 @@ from tk.PanelManager import PanelManager
 
 # width and height
 if sys.platform == "linux":
-    WIDTH = os.system("cat /sys/class/graphics/fb0/virtual_size | cut -d, -f1")
-    HEIGHT = os.system("cat /sys/class/graphics/fb0/virtual_size | cut -d, -f2")
+    WIDTH = int(os.system("cat /sys/class/graphics/fb0/virtual_size | cut -d, -f1"))
+    HEIGHT = int(os.system("cat /sys/class/graphics/fb0/virtual_size | cut -d, -f2"))
 else:
     WIDTH = 1920
     HEIGHT = 1080
