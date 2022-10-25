@@ -29,7 +29,7 @@ clock = pygame.time.Clock()
 
 # create panel manager & main panel
 panel_manager = PanelManager(display, WIDTH, HEIGHT)
-panel = Panel("Welcome", subtitle="Test")
+panel = Panel("Welcome", subtitle="This is a test subtitle")
 panel_manager.add(panel)
 
 # main loop

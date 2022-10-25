@@ -1,5 +1,3 @@
-import logging
-
 import pygame.font
 from pygame import Surface
 
@@ -34,6 +32,7 @@ class PanelManager:
     def update(self, delta: float, fps: int):
         """
         Iterates over all panels, updates them if they're in focus
+        :param fps:
         :param delta:
         :return:
         """

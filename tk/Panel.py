@@ -79,6 +79,13 @@ class PanelTitle:
         self.title = title
         self.subtitle = subtitle
 
+    def get_size(self) -> tuple:
+        """
+        Returns the size of the title bar
+        :return:
+        """
+        return self.manager.width, 140
+
     def update(self):
         """
         Called from the panel, draws this title bar
