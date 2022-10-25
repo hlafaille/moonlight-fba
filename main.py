@@ -33,6 +33,11 @@ button = FzTkButton(
 #button.register_click_callback(lambda: scene_handler.dev_toggle_scene())
 
 while True:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            pygame.quit()
+            exit()
+
     delta_time = clock.tick(60) / 1000
 
     button.set_text("ass")
