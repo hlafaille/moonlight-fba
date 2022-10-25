@@ -12,11 +12,12 @@ class Panel:
     near full screen mode. This UI system will follow the same philosophy
     """
 
-    def __init__(self, title="Panel", focused=False):
+    def __init__(self, title="Panel", subtitle: Optional[str] = None, focused=False):
         self.manager: Optional[PanelManager] = None
         self.title_bar: Optional[PanelTitle] = None
 
         self.title = title
+        self.subtitle = subtitle
         self.focused = focused
         self.id = id(self)
         self.widgets = []
@@ -28,7 +29,7 @@ class Panel:
         :return:
         """
         self.manager = manager
-        self.title_bar = PanelTitle(manager=self.manager, title=self.title)
+        self.title_bar = PanelTitle(manager=self.manager, title=self.title, subtitle=self.subtitle)
 
     def add(self, widget):
         """
@@ -73,9 +74,10 @@ class Panel:
 
 class PanelTitle:
     """The title bar for a panel object"""
-    def __init__(self, manager: PanelManager, title="Panel"):
+    def __init__(self, manager: PanelManager, title="Panel", subtitle: Optional[str] = None):
         self.manager = manager
         self.title = title
+        self.subtitle = subtitle
 
     def update(self):
         """
@@ -98,3 +100,13 @@ class PanelTitle:
         title_y = 0 - title_rect.y
         title_y = (title_y + 140 / 2) - (title_rect.height / 2)
         self.manager.display.blit(title_text, (10, title_y))
+
+        # if there's a subtitle, draw it
+        if self.subtitle:
+            subtitle = self.manager.font_subtitle.render(self.subtitle, True, Color("#c2c2c2"))
+            subtitle_rect = subtitle.get_bounding_rect()
+
+            # blit title text
+            title_y = title_rect.height - subtitle_rect.height - subtitle_rect.y - 2
+            title_y = (title_y + 140 / 2) - (title_rect.height / 2)
+            self.manager.display.blit(subtitle, (title_rect.width + 40, title_y))

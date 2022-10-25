@@ -16,7 +16,8 @@ class PanelManager:
 
         # setup font objects
         self.font_title = pygame.font.Font("tk/fonts/font.ttf", 72)
-        self.font_normal = pygame.font.Font("tk/fonts/regular.ttf", 32)
+        self.font_normal = pygame.font.Font("tk/fonts/regular.ttf", 48)
+        self.font_subtitle = pygame.font.Font("tk/fonts/subtitle.ttf", 48)
 
     def add(self, panel):
         """
