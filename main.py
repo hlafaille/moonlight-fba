@@ -16,7 +16,7 @@ if sys.platform == "linux":
 else:
     WIDTH = 1920
     HEIGHT = 1080
-FPS = 144
+FPS = 60
 
 # initialize pygame and create screen
 pygame.init()

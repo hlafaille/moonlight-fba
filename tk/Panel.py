@@ -14,18 +14,21 @@ class Panel:
 
     def __init__(self, title="Panel", focused=False):
         self.manager: Optional[PanelManager] = None
+        self.title_bar: Optional[PanelTitle] = None
+
         self.title = title
         self.focused = focused
         self.id = id(self)
         self.widgets = []
-        self._title_animation_complete = False
 
-        # bar animation
-        self._current_bar_height = 0
-        self._desired_bar_height = 140
-        self._current_text_y = 0
-        self._desired_text_y = 25
-        self._bar_exponent = 2.7
+    def set_manager(self, manager: PanelManager):
+        """
+        Sets the PanelManager for this object, and initializes the title bar object
+        :param manager:
+        :return:
+        """
+        self.manager = manager
+        self.title_bar = PanelTitle(manager=self.manager, title=self.title)
 
     def add(self, widget):
         """
@@ -49,39 +52,12 @@ class Panel:
         :return:
         """
 
-        if self._current_bar_height <= self._desired_bar_height:
-
-            if self._current_bar_height > self._desired_bar_height / 5:
-                self._bar_exponent = self._bar_exponent / 1.05
-            self._current_bar_height += 0.3 * (delta * 1000) * self._bar_exponent
-            self._current_text_y += 0.055 * (delta * 1000) * self._bar_exponent
-
-            title_bar = pygame.draw.rect(
-                self.manager.display, Color("#1c1c1c"), pygame.Rect(0, 0, self.manager.width, self._current_bar_height)
-            )
-
-            title = self.manager.font_title.render(self.title, True, Color("#f5f5f5"))
-            self.manager.display.blit(title, (20, self._current_text_y))
-        else:
-            self._title_animation_complete = True
 
     def _close(self):
         """
         Closes this panel
         :return:
         """
-
-    def _draw_title(self, delta: float):
-        """
-        Draws the title at the top of the screen, returns the rect dimmensions
-        :return:
-        """
-        if self._title_animation_complete:
-            title_bar = pygame.draw.rect(self.manager.display, Color("#1c1c1c"), pygame.Rect(0, 0, self.manager.width, 140))
-            title = self.manager.font_title.render(self.title, True, Color("#f5f5f5"))
-            self.manager.display.blit(title, (20, 25))
-        else:
-            self._slide_in(delta)
 
     def update(self, delta: float):
         """
@@ -92,4 +68,33 @@ class Panel:
         self.manager.display.fill(Color("#272727"))
         for widget in self.widgets:
             widget.update(delta)
-        self._draw_title(delta)
+        self.title_bar.update()
+
+
+class PanelTitle:
+    """The title bar for a panel object"""
+    def __init__(self, manager: PanelManager, title="Panel"):
+        self.manager = manager
+        self.title = title
+
+    def update(self):
+        """
+        Called from the panel, draws this title bar
+        :return:
+        """
+
+        # create title text
+        title_text = self.manager.font_title.render(self.title, True, Color("#f5f5f5"))
+        title_rect = title_text.get_bounding_rect()
+
+        # draw the title bar
+        title_bar = pygame.draw.rect(
+            self.manager.display,
+            Color("#1c1c1c"),
+            pygame.Rect(0, 0, self.manager.width, 140)
+        )
+
+        # blit title text
+        title_y = 0 - title_rect.y
+        title_y = (title_y + 140 / 2) - (title_rect.height / 2)
+        self.manager.display.blit(title_text, (10, title_y))

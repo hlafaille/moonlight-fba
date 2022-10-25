@@ -16,7 +16,7 @@ class PanelManager:
 
         # setup font objects
         self.font_title = pygame.font.Font("tk/fonts/font.ttf", 72)
-        self.font_normal = pygame.font.Font("tk/fonts/segoe.ttf", 32)
+        self.font_normal = pygame.font.Font("tk/fonts/regular.ttf", 32)
 
     def add(self, panel):
         """
@@ -25,7 +25,7 @@ class PanelManager:
         :return:
         """
         self._panels.append(panel)
-        panel.manager = self
+        panel.set_manager(self)
 
         if len(self._panels) == 1:
             panel.focused = True
