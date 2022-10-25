@@ -6,11 +6,12 @@ from pygame import Surface
 
 class PanelManager:
     """Controls which panel should be on screen, and which came before it"""
-    def __init__(self, display: Surface, width, height):
+    def __init__(self, display: Surface, width: int, height: int):
         self._panels = []
         self.display = display
         self.width = width
         self.height = height
+        self.fps = None
         self._current_panel = None
 
         # setup font objects
@@ -29,12 +30,14 @@ class PanelManager:
         if len(self._panels) == 1:
             panel.focused = True
 
-    def update(self, delta: float):
+    def update(self, delta: float, fps: int):
         """
         Iterates over all panels, updates them if they're in focus
         :param delta:
         :return:
         """
+        self.fps = fps
+
         for panel in self._panels:
             if panel.focused:
                 panel.update(delta)

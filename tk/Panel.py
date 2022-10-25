@@ -18,6 +18,12 @@ class Panel:
         self.focused = focused
         self.id = id(self)
         self.widgets = []
+        self._title_animation_complete = False
+
+        # bar animation
+        self._current_bar_height = 0
+        self._desired_bart_height = 140
+        self._bar_exponent = 3
 
     def add(self, widget):
         """
@@ -35,20 +41,44 @@ class Panel:
         """
         self.focused = focus
 
+    def _slide_in(self, delta: float):
+        """
+        Function that draws the slide_in animation
+        :return:
+        """
+
+        if self._current_bar_height <= self._desired_bart_height:
+
+            if self._current_bar_height > self._desired_bart_height / 5:
+                self._bar_exponent = self._bar_exponent / 1.05
+            self._current_bar_height += 0.3 * (delta * 1000) * self._bar_exponent
+
+            title_bar = pygame.draw.rect(
+                self.manager.display, Color("#1c1c1c"), pygame.Rect(0, 0, self.manager.width, self._current_bar_height)
+            )
+            print(self._current_bar_height)
+            title = self.manager.font_title.render(self.title, True, Color("#f5f5f5"))
+            self.manager.display.blit(title, (20, 25))
+        else:
+            self._title_animation_complete = True
+
     def _close(self):
         """
         Closes this panel
         :return:
         """
 
-    def _draw_title(self):
+    def _draw_title(self, delta: float):
         """
         Draws the title at the top of the screen, returns the rect dimmensions
         :return:
         """
-        title_bar = pygame.draw.rect(self.manager.display, Color("#1c1c1c"), pygame.Rect(0, 0, self.manager.width, 140))
-        title = self.manager.font_title.render(self.title, True, Color("#f5f5f5"))
-        self.manager.display.blit(title, (20, 25))
+        if self._title_animation_complete:
+            title_bar = pygame.draw.rect(self.manager.display, Color("#1c1c1c"), pygame.Rect(0, 0, self.manager.width, 140))
+            title = self.manager.font_title.render(self.title, True, Color("#f5f5f5"))
+            self.manager.display.blit(title, (20, 25))
+        else:
+            self._slide_in(delta)
 
     def update(self, delta: float):
         """
@@ -59,4 +89,4 @@ class Panel:
         self.manager.display.fill(Color("#272727"))
         for widget in self.widgets:
             widget.update(delta)
-        self._draw_title()
+        self._draw_title(delta)

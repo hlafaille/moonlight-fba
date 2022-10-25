@@ -16,6 +16,7 @@ if sys.platform == "linux":
 else:
     WIDTH = 1920
     HEIGHT = 1080
+FPS = 144
 
 # initialize pygame and create screen
 pygame.init()
@@ -40,9 +41,9 @@ while True:
             exit()
 
     # run clock
-    delta = clock.tick(60) / 1000
+    delta = clock.tick(FPS) / 1000
 
-    panel_manager.update(delta)
+    panel_manager.update(delta, FPS)
 
     # update display
     pygame.display.update()
