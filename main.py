@@ -9,7 +9,7 @@ from tk.PanelManager import PanelManager
 
 # width and height
 if sys.platform == "linux":
-    FB_VIRTUAL_SIZE = subprocess.run(["cat", "/sys/class/graphics/fb0/virtual_size"])
+    FB_VIRTUAL_SIZE = subprocess.run(["cat", "/sys/class/graphics/fb0/virtual_size"], stdout=subprocess.PIPE)
     WIDTH, HEIGHT = FB_VIRTUAL_SIZE.stdout.decode("utf8").split(",")
 else:
     WIDTH = 1920
